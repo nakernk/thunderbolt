@@ -26,7 +26,7 @@ server =  '192.168.1.100'		#Servidor raspberry
 usuario = 'pi'					#Usuario ssh
 clave =   ''					#Clave ssh
 
-#Ruta del directorio a origen (local)
+#Ruta del directorio origen (local)
 local = '/Users/fernandogonzalez/Developer/Python/thunderbolt'
 
 #Ruta del directorio destino (remoto)
@@ -51,7 +51,3 @@ print "Sincronizando Directorio...\n"
 print run_command(command, '')
 
 print "-- Proceso finalizado-- :)\n\n"
-print "El directorio remoto contiene:\n"
-command = 'sshpass -p \''+clave+'\' ssh '+usuario+'@'+server+' ls '+remoto
-print run_command(command, '')
-
