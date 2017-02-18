@@ -2,7 +2,7 @@
 # DESCRIPTION: Script para la subida de archivos o directorios por ssh 
 # 			   a un server remoto.
 #
-#			-Solo sube los archivos con cambios detectados
+#			-COPIA EL DIRECTORIO
 #
 # PRE: Para usar este Script hay que instalar sshpass en el sistema
 #		Windows: No se buscaos la vida
@@ -30,11 +30,11 @@ clave =   'raspbian'			#Clave ssh
 local = '/Users/fernandogonzalez/Developer/Python/thunderbolt'
 
 #Ruta del directorio destino (remoto)
-remoto = './python/thunderbolt' #ruta relativa al directorio /home/usuario (~/)
+remoto = './python/' #ruta relativa al directorio /home/usuario (~/)
 #####################################################################
 
 # Inicio del programa
-print "\n\n -== Script TRANSFERENCIA DE SINCRONIZACION ==- \n\n"
+print "\n\n -== Script TRANSFERENCIA DE DIRECTORIO ==- \n\n"
 
 #Funcion que ejecuta un comando y devuelve el resultado de la ejecucion
 def run_command(command, message):
@@ -46,8 +46,9 @@ def run_command(command, message):
         return str(results) + "\n"
 
 #Copia el directorio del tema y sus archivos (Solo los cambios)
-command = 'sshpass -p \''+clave+'\' rsync -drShv --progress '+local+' '+usuario+'@'+server+':'+remoto # La y del final puede fallar si se hace desde otro sistema que no sea Mac Os
-print "Sincronizando Directorio...\n"
+command = 'sshpass -p \''+clave+'\' scp -r '+local+' '+usuario+'@'+server+':'+remoto
+print "Copiando Directorio...\n"
 print run_command(command, '')
 
 print "-- Proceso finalizado-- :)\n\n"
+
