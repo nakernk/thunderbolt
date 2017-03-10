@@ -19,8 +19,8 @@ DHT dht(DHTPIN, DHTTYPE); //Declaracion para leer el sensor
 
 //ACTIVA EL MODO DEPURACION
 //Con esta variable habilitamos la depuracion con mensajes por puerto serial
+#define DEBUG
 
-const bool debugMode = true;
 //################################################################################
 
 
@@ -29,19 +29,19 @@ void readTempHum(){
   float temp = dht.readTemperature(); 
   float hum = dht.readHumidity(); 
 
-  if(debugMode){
+  #ifdef DEBUG
     Serial.print("Temperatura: ");
     Serial.print(temp);
     Serial.print("\t\t");
     Serial.print("Humedad: "); 
     Serial.print(hum);
-  }
+  #endif
 }
 
 void setup() {
-  if(debugMode){
+  #ifdef DEBUG
     Serial.begin(9600); //Comunicacion serial para depurar
-  }
+  #endif
   dht.begin(); //Comunicacion con el sensor
 }
 
@@ -49,8 +49,8 @@ void loop() {
   
   readTempHum();
 
-  if(debugMode){
+  #ifdef DEBUG
     Serial.println(""); //Salto de linea
     delay(2000); //Se espera 2 segundos para seguir leyendo
-  }
+  #endif
 }
